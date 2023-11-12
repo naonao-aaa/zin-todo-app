@@ -16,9 +16,9 @@ export const useMutateNotice = () => {
     },
     {
       onSuccess: (res) => {
-        const previousNotices = queryClient.getQueryData<Notice[]>('notices')
+        const previousNotices = queryClient.getQueryData<Notice[]>(['notices'])
         if (previousNotices) {
-          queryClient.setQueryData('notices', [...previousNotices, res[0]])
+          queryClient.setQueryData(['notices'], [...previousNotices, res[0]])
         }
         reset()
       },
@@ -40,10 +40,10 @@ export const useMutateNotice = () => {
     },
     {
       onSuccess: (res, variables) => {
-        const previousNotices = queryClient.getQueryData<Notice[]>('notices')
+        const previousNotices = queryClient.getQueryData<Notice[]>(['notices'])
         if (previousNotices) {
           queryClient.setQueryData(
-            'notices',
+            ['notices'],
             previousNotices.map((notice) =>
               notice.id === variables.id ? res[0] : notice,
             ),
@@ -69,10 +69,10 @@ export const useMutateNotice = () => {
     },
     {
       onSuccess: (_, variables) => {
-        const previousNotices = queryClient.getQueryData<Notice[]>('notices')
+        const previousNotices = queryClient.getQueryData<Notice[]>(['notices'])
         if (previousNotices) {
           queryClient.setQueryData(
-            'notices',
+            ['notices'],
             previousNotices.filter((notice) => notice.id !== variables),
           )
         }
